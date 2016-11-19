@@ -117,6 +117,7 @@ module.exports = function(passport) {
     }));
 
     // Facebook
+    var fbStrategy = configAuth.facebookAuth;
     fbStrategy.passReqToCallback = true;
     passport.use(new FacebookStrategy(fbStrategy,
     function(req, token, refreshToken, profile, done) {
