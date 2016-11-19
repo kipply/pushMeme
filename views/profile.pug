@@ -1,0 +1,76 @@
+doctype html
+html
+  head
+    title Push Meme
+    link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')
+    style.
+      body         { padding-top:80px; word-wrap:break-word; }
+  body
+    .container
+      .page-header.text-center
+        h1
+          span.fa.fa-anchor
+          |  Profile Page
+        a.btn.btn-default.btn-sm(href='/logout') Logout
+      .row
+        // LOCAL INFORMATION
+        .col-sm-6
+          .well
+            h3
+              span.fa.fa-user
+              |  Local
+              if (user.local.email)
+                p
+                  strong id
+                  | :
+                a.btn.btn-default(href='/unlink/local') Unlink
+              else
+                a.btn.btn-default(href='/connect/local') Connect Local
+        // FACEBOOK INFORMATION
+        .col-sm-6
+          .well
+            h3.text-primary
+              span.fa.fa-facebook
+              |  Facebook
+              if (user.facebook.token)
+                p
+                  strong id
+                  span=user.facebook.id
+                  br
+                  strong token
+                  span=user.facebook.token
+                  br
+                  strong email
+                  span=user.facebook.email
+                  br
+                  strong name
+                  span=user.facebook.name
+                  br
+                a.btn.btn-primary(href='/unlink/facebook') Unlink
+              else
+                a.btn.btn-primary(href='/connect/facebook') Connect Facebook
+
+      .row
+        // GOOGLE INFORMATION
+        .col-sm-6
+          .well
+            h3.text-danger
+              span.fa.fa-google-plus
+              |  Google+
+
+              if (user.google.token)
+                p
+                  strong id
+                  span=user.google.id
+                  br
+                  strong token
+                  span=user.google.token
+                  br
+                  strong email
+                  span=user.google.email 
+                  br
+                  strong name
+                  span=user.google.name
+                a.btn.btn-danger(href='/unlink/google') Unlink
+                a.btn.btn-danger(href='/connect/google') Connect Google
