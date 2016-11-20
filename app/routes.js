@@ -92,18 +92,28 @@ var Group = require('../app/models/group.js');
             })
 
             app.post('/createnewgroup', function(req, res) {
-              console.log(req.body.groupname);
-              var newgroup = new Group({
-                 name: req.body.groupname,
-                 password: "ac",
-                 members: null,
-                 groupgoals: null
-              });
-              newgroup.password = null;
+              let groupName = req.body.groupname;
+              let password = req.body.password;
+              console.log(req.body.password);
+              //let temp = req.body.groupname;
+              //console.log(temp);
+              let newgroup = new Group();
+
+              newgroup.group.gname = groupName;
+              newgroup.group.gpassword = password;
+
               console.log(newgroup);
-              newgroup.save(function(err) {
-                if (err) return handleError(err);
-              })
+              newgroup.save(function(err, savedGroup) {
+                if (err)
+                  return handleError(err);
+                if(savedGroup){
+                    console.log("Group Saved")
+                    console.log(savedGroup)
+                }else{
+                  console.log("Group not saved");
+                }
+              });
+
               res.redirect('/group')
             });
 

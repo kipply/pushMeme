@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 var groupSchema = mongoose.Schema({
 
   group : {
-    nameOfGroup: String,
-    passwordOfGroup: String,
+    name: String,
+    password: String,
     members: [],
 
     groupgoals: [{
