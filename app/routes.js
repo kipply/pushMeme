@@ -104,8 +104,6 @@ module.exports = function(app, passport) {
               })
             });
 
-
-
             // takes you to the create a group page
             app.get('/creategroup', function(req, res) {
               res.render('create-group.pug')
@@ -224,13 +222,22 @@ module.exports = function(app, passport) {
         console.log(req.body);
         addedGoals = req.user.goals;
         var tasks = [];
-        for (var i = 0; i < req.body.taskName.length; i++){
+        if (addedGoals ==[]){
             tasks.push({
-                details: req.body.taskName[i],
-                weight: req.body.difficulty[i],
-                dueDate: req.body.dueDate[i],
+                details: req.body.taskName,
+                weight: req.body.difficulty,
+                dueDate: req.body.dueDate,
                 completed: false
             })
+        } else{
+            for (var i = 0; i < req.body.taskName.length; i++){
+                tasks.push({
+                    details: req.body.taskName[i],
+                    weight: req.body.difficulty[i],
+                    dueDate: req.body.dueDate[i],
+                    completed: false
+                })
+            }
         }
 
         addedGoals.push({
@@ -249,15 +256,12 @@ module.exports = function(app, passport) {
     app.get('/goals', isLoggedIn, function(req, res) {
         var progresses = [];
         for (var i = 0; i < req.user.goals.length; i++){
-            console.log("WOW")
             denom = 0
             numer = 0
             for (var j = 0; j < req.user.goals[i].tasks.length; j++){
-                console.log("LOOP");
                 denom += req.user.goals[i].tasks[j].weight;
                 if (req.user.goals[i].tasks[j].completed){
                     numer += req.user.goals[i].tasks[j].weight;
-                    console.log("IF")
                 }
             }
             progresses.push(Math.round(numer/denom*100))
