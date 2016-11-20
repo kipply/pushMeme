@@ -219,10 +219,10 @@ module.exports = function(app, passport) {
     });
 
     app.post('/create-new-goal', isLoggedIn, function(req, res){
-        console.log(req.body);
         addedGoals = req.user.goals;
         var tasks = [];
-        if (addedGoals ==[]){
+        if (req.body.taskName !== []){
+            console.log("WHENEO ENUHOEU");
             tasks.push({
                 details: req.body.taskName,
                 weight: req.body.difficulty,
