@@ -100,8 +100,12 @@ module.exports = function(app, passport) {
             }));
 
             // takes you to the group home page where you can join group or search for groups
-            app.get('/group', function(req, res) {
-              res.render('group.pug')
+            app.get('/group', isLoggedIn, function(req, res) {
+               Group.find({}, function(err, group){
+                if(err)
+                  throw err;
+                res.render('group.pug', {groups: group, user: req.user});
+              })
             })
 
             app.get('/group/:id', function(req, res) {
@@ -126,6 +130,7 @@ module.exports = function(app, passport) {
               res.render('create-group.pug')
             });
 
+          
             // creates a new group with attributes of name and password
             app.post('/createnewgroup', isLoggedIn, function(req, res) {
 
@@ -136,9 +141,9 @@ module.exports = function(app, passport) {
               var newgroup = new Group();
 
               // sets the attributes from the forms
-              newgroup.group.name = groupName;
-              newgroup.group.password = password;
-              newgroup.group.members = req.user.id;
+              newgroup.name = groupName;
+              newgroup.password = password;
+                  newgroup.owner = req.user.id;
 
               console.log(newgroup);
               newgroup.save(function(err, savedGroup) {
@@ -168,8 +173,17 @@ module.exports = function(app, passport) {
               })
             });
 
+            app.get('/new-group-goal', isLoggedIn, function(req, res) {
+
+                       Group.find({}, function(err, group){
+                        if(err)
+                          throw err;
+                        res.render('new-group-goal.pug', {groups: group, user: req.user});
+                      })
+            });
+
             app.post('/create-new-group-goal', function(req, res){
-                console.log(req.body.group);
+                console.log(req.body);
                 addedGoals = req.group.group.groupgoals;
                 var tasks = [];
                 for (var i = 0; i < req.body.taskName.length; i++){
@@ -192,6 +206,7 @@ module.exports = function(app, passport) {
                 })
 
                 res.redirect('/group-home')
+
             })
 
             app.get('/group-home', function(req, res) {
@@ -333,6 +348,27 @@ module.exports = function(app, passport) {
 
       res.redirect('/goals')
     })
+
+
+    app.post('/joingroup', function(req, res) {
+        Group.find({}, function(err, group){
+            if(err)
+              throw err;
+            for (var i = 0; i < group.length; i++){
+                if (req.body.joinpassword == group[i].password){
+                    updatedMembers = group[i].members; 
+                    updatedMembers.push(req.user.id);
+                    Group.update({_id: group[i].id}, {
+                        members: updatedMembers
+                    }, function(err, numberAffected, rawResponse) {
+                       //handle it
+                    })
+                }
+            }
+            res.render('group.pug', {groups: group, user: req.user});
+        })
+    });
+
 
 
 };
