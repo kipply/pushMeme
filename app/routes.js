@@ -88,10 +88,29 @@ var Group = require('../app/models/group.js');
               res.render('group.pug')
             })
 
+            app.get('/group/:id', function(req, res) {
+              var id = req.params.id;
+              //var group = req.params;
+              //console.log(req.query.name);
+              //console.log("A" + group);
+              Group.findOne({
+                '_id': id
+              }, function(err, group){
+                if(err)
+                  throw err;
+                  res.render('group-home.pug', {group: group});
+                  console.log(group)
+              })
+
+              //res.send('id: ' + req.query.id);
+            });
+
+
+
             // takes you to the create a group page
             app.get('/creategroup', function(req, res) {
               res.render('create-group.pug')
-            })
+            });
 
             // creates a new group with attributes of name and password
             app.post('/createnewgroup', function(req, res) {
@@ -116,8 +135,11 @@ var Group = require('../app/models/group.js');
                 }else{
                   console.log("Group not saved");
                 }
+                var groupid = savedGroup.id;
+                var groupy = savedGroup;
+                res.redirect('/group/' + groupid);
               });
-              res.redirect('/group')
+
             });
 
             app.get('/joingroup', function(req, res) {

@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title Push Meme
+    link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')
+    style.
+      body         { padding-top:80px; word-wrap:break-word; }
+  body
+    .container
+      .page-header.text-center
+        h1
+          span.fa.fa-anchor=group.group.name
+      .row
+        // CREATE GROUP SECTION
+        span
+          .well
+            h2
+
+              form(action='/createnewgroup', method='post')
+                .form-group
+                  span.fa.fa-create-group
+                  |  Name of Group
+                  input.form-control(type='text', name='groupname')
+                  span.fa.fa-create-group
+                  |  Password
+                  input.form-control(type='password', name='password')
+                  button.btn.btn-default.btn-m(type='submit') Create Group
