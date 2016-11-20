@@ -122,8 +122,9 @@ z-index: 999 !important;
 
  table
 
- {width:100%;
-  vertical-align: centre
+ {
+  width: 100%;
+  vertical-align: center;
 
  } 
 

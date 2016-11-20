@@ -5,6 +5,8 @@ link(rel='stylesheet', href='https://code.getmdl.io/1.2.1/material.indigo-pink.m
 script(defer='', src='https://code.getmdl.io/1.2.1/material.min.js')
 html(lang='en')
   head
+    script(src='https://code.jquery.com/jquery-3.1.1.min.js', integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=', crossorigin='anonymous')
+
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='description', content='A front-end template that helps you build fast, modern mobile web apps.')
@@ -29,6 +31,7 @@ html(lang='en')
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
     link(rel='stylesheet', href='https://code.getmdl.io/1.2.1/material.cyan-light_blue.min.css')
     link(rel='stylesheet', href='styles.css')
+
     style.
       #view-source {
       position: fixed;
@@ -105,6 +108,7 @@ html(lang='en')
             section#fixed-tab-1.mdl-layout__tab-panel.is-active
               .page-content
                 // TABLE
+<<<<<<< HEAD
                 table#my-table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable.mdl-shadow--2dp
                   thead#heading1
                     tr
@@ -160,6 +164,39 @@ html(lang='en')
                       td.mdl-data-table__cell--non-numeric Listen to Covers
                     tr
                       td.mdl-data-table__cell--non-numeric Watch YouTube Videos
+=======
+
+                each item in goals
+                  br
+                  table#my-table.mdl-data-table.mdl-shadow--2dp.mdl-shadow--2dp
+                    thead#heading1
+                      thead
+                      tr
+                        th
+                        th#goal1.mdl-data-table__cell--non-numeric=item.details
+                          #p2.mdl-progress.mdl-js-progress
+                        th Due Date
+                    tbody
+                      - for (var x = 0; x < item.tasks.length; x++)
+                        tr
+                          td
+                            label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.mdl-data-table__select(for='row['+item.details+x+']')
+                              input.mdl-checkbox__input(type='checkbox', id='row['+item.details+x+']', onclick ='updateCompletion(this)')
+
+                          td.mdl-data-table__cell--non-numeric=item.tasks[x].details
+                          td=item.tasks[x].dueDate
+                          script.
+                            function updateCompletion(el) {
+                              var id = $(el).attr('id');
+                              if($(el).is(':checked')){
+                                window.location = '/tasks/:'+id+"/"+":true";
+                              } else{
+
+                                window.location = '/tasks/:'+id+"/"+":false";
+                              }
+                            }
+
+>>>>>>> 8b38e483a62e6ebd19d23a1368bafd3cb25d4c58
             section#fixed-tab-2.mdl-layout__tab-panel
               .page-content
                 // TABLE
@@ -267,6 +304,7 @@ html(lang='en')
           g#Layer_4
             polygon(stroke-miterlimit='10', points='469.3,222.7 1,222.7 48.7,166.7 155.7,188.3 212,132.7\
             296.7,128 380.7,184.3 436.7,125   ')
+<<<<<<< HEAD
         //- each item in goals
         //-   b=item.details
         //-   br
@@ -274,3 +312,5 @@ html(lang='en')
         //-     p=task.details
         //-     p=task.dueDate
         //-       
+=======
+>>>>>>> 8b38e483a62e6ebd19d23a1368bafd3cb25d4c58
