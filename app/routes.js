@@ -189,9 +189,9 @@ module.exports = function(app, passport) {
                     for (var i = 0; i < group.length; i++){
                         if (req.body.joinpassword == group[i].password){
                             updatedMembers = group[i].members; 
-                            members
+                            updatedMembers.push(req.user.id);
                             Group.update({_id: group[i].id}, {
-                                messages
+                                members: updatedMembers
                             }, function(err, numberAffected, rawResponse) {
                                //handle it
                             })
@@ -234,41 +234,32 @@ module.exports = function(app, passport) {
 
         res.render('new-goal.pug');
     });
-
-    app.post('/create-new-goal', isLoggedIn, function(req, res){
-        addedGoals = req.user.goals;
-        var tasks = [];
-        if (req.body.taskName !== []){
-            console.log("WHENEO ENUHOEU");
-            tasks.push({
-                details: req.body.taskName,
-                weight: req.body.difficulty,
-                dueDate: req.body.dueDate,
-                completed: false
-            })
-        } else{
-            for (var i = 0; i < req.body.taskName.length; i++){
-                tasks.push({
-                    details: req.body.taskName[i],
-                    weight: req.body.difficulty[i],
-                    dueDate: req.body.dueDate[i],
-                    completed: false
-                })
-            }
-        }
-
-        addedGoals.push({
-            details: req.body.goalName,
-            tasks:tasks
-        })
-        User.update({_id: req.user._id}, {
-            goals: addedGoals
-        }, function(err, numberAffected, rawResponse) {
-           //handle it
-        })
-
-        res.redirect('/new-goal')
-    })
+   app.post('/create-new-goal', isLoggedIn, function(req, res){
+        console.log(req.body);
+         addedGoals = req.user.goals;
+         var tasks = [];
+         if (req.body.taskName)
+         for (var i = 0; i < req.body.taskName.length; i++){
+             tasks.push({
+                 details: req.body.taskName[i],
+                 weight: req.body.difficulty[i],
+                 dueDate: req.body.dueDate[i],
+                 completed: false
+             })
+         }
+ 
+         addedGoals.push({
+             details: req.body.goalName,
+             tasks:tasks
+         })
+         User.update({_id: req.user._id}, {
+             goals: addedGoals
+         }, function(err, numberAffected, rawResponse) {
+            //handle it
+         })
+ 
+         res.redirect('/new-goal')
+     })
 
     app.get('/goals', isLoggedIn, function(req, res) {
         var progresses = [];

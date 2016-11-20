@@ -130,7 +130,7 @@ html(lang='en')
             .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
               input#sample3.mdl-textfield__input(type='text', name='goalName')
 
-              label.mdl-textfield__label(for='sample3') Goal
+              label.mdl-textfield__label Goal
             .group(id="task")
 
               .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
@@ -138,7 +138,7 @@ html(lang='en')
                 label.mdl-textfield__label(for='sample3') Task
 
               .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                input.date-format.mdl-textfield__input(type='text', name='dueDate', placeholder="Due Date", required)
+                input.datePicker.date-format.mdl-textfield__input(type='text', name='dueDate', placeholder="Due Date", required)
                 label.mdl-textfield__label Add Date
 
                 label Difficulty
@@ -148,7 +148,7 @@ html(lang='en')
                   option(value='3') Normal
                   option(value='4') Hard
                   option(value='5') Very Hard
-              a#add_more.mdl-button.mdl-js-button Add Task
+            a#add_more.mdl-button.mdl-js-button Add Task
 
             button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent(type='submit') Create goal
             script(type='text/javascript').
@@ -165,7 +165,7 @@ html(lang='en')
               shortTime: false,
               format: 'HH:mm'
               });
-              $('.date-format').bootstrapMaterialDatePicker
+              $('.datePicker').bootstrapMaterialDatePicker
               ({
               format: 'dddd DD MMMM YYYY - HH:mm'
               });
