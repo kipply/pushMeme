@@ -20,7 +20,16 @@ var userSchema = mongoose.Schema({
         token        : String,
         email        : String,
         name         : String
-    }
+    },
+    goals: [{
+        details: String,
+      tasks:[{
+        details: String, 
+        weight: Number, 
+        dueDate: String,
+        completed: Boolean
+      }]
+    }]
 
 });
 

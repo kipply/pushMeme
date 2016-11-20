@@ -1,3 +1,4 @@
+var User = require('../app/models/user');
 module.exports = function(app, passport) {
 var Group = require('../app/models/group.js');
 
@@ -137,13 +138,46 @@ var Group = require('../app/models/group.js');
 
     // google ---------------------------------
     app.get('/unlink/google', isLoggedIn, function(req, res) {
-        var user          = req.user;
+        var user = req.user;
         user.google.token = undefined;
         user.save(function(err) {
             res.redirect('/profile');
         });
     });
 
+    app.get('/new-goal', isLoggedIn, function(req, res) {
+        res.render('new-goal.pug');
+    });
+
+    app.post('/create-new-goal', isLoggedIn, function(req, res){
+        console.log(req.body);
+        addedGoals = req.user.goals;
+        var tasks = [];
+        for (var i = 0; i < req.body.taskName.length; i++){
+            tasks.push({
+                details: req.body.taskName[i],
+                weight: req.body.difficulty[i],
+                dueDate: req.body.dueDate[i],
+                completed: false
+            })
+        }
+
+        addedGoals.push({
+            details: req.body.goalName,
+            tasks:tasks
+        })
+        User.update({_id: req.user._id}, {
+            goals: addedGoals
+        }, function(err, numberAffected, rawResponse) {
+           //handle it
+        })
+
+        res.redirect('/new-goal')
+    })
+
+    app.get('/goals', isLoggedIn, function(req, res) {
+        res.render('goals.pug', {goals: req.user.goals});
+    });
 
 };
 

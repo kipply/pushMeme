@@ -14,7 +14,10 @@ html
         h1
           span.fa.fa-sign-in
           |  Signup
-        // LOGIN FORM
+
+          if (message.length > 0)
+            .alert.alert-danger
+              p=message
         form(action='/signup', method='post')
           .form-group
             label Email
