@@ -18,6 +18,7 @@ module.exports = function(app, passport) {
 
           if (badges) {
             console.log(badges.length);
+
             res.render('profile.pug', {
               user : req.user,
               badges: badges
