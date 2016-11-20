@@ -1,12 +1,10 @@
 doctype html
-// views/login.ejs
+// views/login.pug
 html
   head
     title Push Meme
     link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
-    // load bootstrap css
     link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')
-    // load fontawesome
     style.
       body    { padding-top:80px; }
   body
@@ -15,6 +13,10 @@ html
         h1
           span.fa.fa-sign-in
           |  Login
+
+          if (message.length > 0)
+            .alert.alert-danger
+              p=message
         // LOGIN FORM
         form(action='/login', method='post')
           .form-group

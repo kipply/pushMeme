@@ -12,65 +12,30 @@ html
         h1
           span.fa.fa-anchor
           |  Profile Page
+
+        a.btn.btn-default.btn-sm(href='/new-goal') New Goal! 
+        a.btn.btn-default.btn-sm(href='/goals') My Goals
         a.btn.btn-default.btn-sm(href='/logout') Logout
       .row
-        // LOCAL INFORMATION
+        // USER INFORMATION
         .col-sm-6
           .well
             h3
               span.fa.fa-user
-              |  Local
-              if (user.local.email)
-                p
-                  strong id
-                  | :
-                a.btn.btn-default(href='/unlink/local') Unlink
-              else
-                a.btn.btn-default(href='/connect/local') Connect Local
-        // FACEBOOK INFORMATION
-        .col-sm-6
-          .well
-            h3.text-primary
-              span.fa.fa-facebook
-              |  Facebook
               if (user.facebook.token)
-                p
-                  strong id
-                  span=user.facebook.id
-                  br
-                  strong token
-                  span=user.facebook.token
-                  br
-                  strong email
-                  span=user.facebook.email
-                  br
-                  strong name
-                  span=user.facebook.name
-                  br
-                a.btn.btn-primary(href='/unlink/facebook') Unlink
+                span=" " + user.facebook.name
+              else if (user.google.token)
+                span=user.google.name
               else
+                span=user.local.email
+              p 
+                b Email: 
+                if (user.google.token)
+                  span=user.google.email
+                else if (user.facebook.token)
+                  span=user.facebook.email
+              if (!user.facebook.token)
                 a.btn.btn-primary(href='/connect/facebook') Connect Facebook
-
-      .row
-        // GOOGLE INFORMATION
-        .col-sm-6
-          .well
-            h3.text-danger
-              span.fa.fa-google-plus
-              |  Google+
-
-              if (user.google.token)
-                p
-                  strong id
-                  span=user.google.id
-                  br
-                  strong token
-                  span=user.google.token
-                  br
-                  strong email
-                  span=user.google.email 
-                  br
-                  strong name
-                  span=user.google.name
-                a.btn.btn-danger(href='/unlink/google') Unlink
+              if (!user.google.token)
                 a.btn.btn-danger(href='/connect/google') Connect Google
+      
