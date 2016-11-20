@@ -146,7 +146,6 @@ html(lang='en')
             section#fixed-tab-1.mdl-layout__tab-panel.is-active
               .page-content
                 // TABLE
-
                 - for (var i = 0; i < goals.length; i++)
                   br
                   table#my-table.mdl-data-table.mdl-shadow--2dp.mdl-shadow--2dp
@@ -156,7 +155,6 @@ html(lang='en')
                         th#checkboxes
                         th#goal1.mdl-data-table__cell--non-numeric
                           span=goals[i].details
-
                           .progress
                             .progress-bar(role='progressbar', aria-valuenow=progresses[i], aria-valuemin='0', aria-valuemax='100', style='width: '+progresses[i]+'%')
                               span=progresses[i]+"% "
@@ -179,7 +177,6 @@ html(lang='en')
                                 window.location = '/tasks/:'+id+"/"+":true";
                               } else{
                                 window.location = '/tasks/:'+id+"/"+":false";
-                                all = false;
                               }
                             }
 
