@@ -1,5 +1,7 @@
 var User = require('../app/models/user');
 module.exports = function(app, passport) {
+var Group = require('../app/models/group.js');
+
 
     app.get('/', function(req, res) {
         res.render('index.pug');
@@ -80,6 +82,40 @@ module.exports = function(app, passport) {
                 successRedirect : '/profile',
                 failureRedirect : '/'
             }));
+
+            app.get('/group', function(req, res) {
+              res.render('group.pug')
+            })
+
+            app.get('/creategroup', function(req, res) {
+              res.render('create-group.pug')
+            })
+
+            app.post('/createnewgroup', function(req, res) {
+              console.log(req.body.groupname);
+              var newgroup = new Group({
+                 name: req.body.groupname,
+                 password: "ac",
+                 members: null,
+                 groupgoals: null
+              });
+              newgroup.password = null;
+              console.log(newgroup);
+              newgroup.save(function(err) {
+                if (err) return handleError(err);
+              })
+              res.redirect('/group')
+            });
+
+            app.get('/group', function(req, res) {
+              res.render('group.pug', { message: req.flash('signupMessage')});
+            });
+
+
+            app.get('/joingroup', function(req, res) {
+              res.redirect()
+            });
+
 
 
     app.get('/unlink/local', isLoggedIn, function(req, res) {

@@ -17,16 +17,13 @@ html
         span
           .well
             h2
-              p
-              span.fa.fa-create-group
-              |  Name of Group
+
               form(action='/createnewgroup', method='post')
                 .form-group
-                  input.form-control(type='text', name='name')
-              p
-              span.fa.fa-create-group
-              | Password
-              form(action='/createnewgroup', method='post')
-                .form-group
+                  span.fa.fa-create-group
+                  |  Name of Group
+                  input.form-control(type='text', name='groupname')
+                  span.fa.fa-create-group
+                  |  Password
                   input.form-control(type='password', name='password')
                   button.btn.btn-default.btn-m(type='submit') Create Group

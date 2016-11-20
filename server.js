@@ -10,6 +10,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
+<<<<<<< HEAD
+var configDB = require('./config/database.js');
+
 mongoose.connect('mongodb://wow:wow@ds151927.mlab.com:51927/boop'); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
@@ -34,6 +37,6 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-require('./app/routes.js')(app, passport); 
+require('./app/routes.js')(app, passport);
 app.listen(port);
 console.log('The magic happens on port ' + port);
