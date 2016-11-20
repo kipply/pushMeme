@@ -186,6 +186,10 @@ var Group = require('../app/models/group.js');
     app.get('/goals', isLoggedIn, function(req, res) {
         res.render('goals.pug', {goals: req.user.goals});
     });
+    app.get('/users/:userId/books/:bookId', function (req, res) {
+      res.send(req.params)
+    })
+
 
 };
 

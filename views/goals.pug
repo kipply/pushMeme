@@ -5,6 +5,8 @@ link(rel='stylesheet', href='https://code.getmdl.io/1.2.1/material.indigo-pink.m
 script(defer='', src='https://code.getmdl.io/1.2.1/material.min.js')
 html(lang='en')
   head
+    script(src='https://code.jquery.com/jquery-3.1.1.min.js', integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=', crossorigin='anonymous')
+
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='description', content='A front-end template that helps you build fast, modern mobile web apps.')
@@ -121,18 +123,22 @@ html(lang='en')
                       - for (var x = 0; x < item.tasks.length; x++)
                         tr
                           td
-                            label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.mdl-data-table__select(for='row['+item+x+']')
-                              input.mdl-checkbox__input(type='checkbox', id='row['+item+x+']')
+                            label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.mdl-data-table__select(for='row['+item.details+x+']')
+                              input.mdl-checkbox__input(type='checkbox', id='row['+item.details+x+']', onclick ='updateCompletion(this)')
 
                           td.mdl-data-table__cell--non-numeric=item.tasks[x].details
                           td=item.tasks[x].dueDate
                           script.
-                            $('input[type=checkbox]').change(
-                            function(){
-                                if (this.checked) {
-                                    alert('checked');
-                                }
-                            });
+                            function updateCompletion(el) {
+                              var id = $(el).attr('id');
+                              if($(el).is(':checked')){
+                                window.location = '/tasks/:'+id+"/"+":true";
+                              } else{
+
+                                window.location = '/tasks/:'+id+"/"+":false";
+                              }
+                            }
+
             section#fixed-tab-2.mdl-layout__tab-panel
               .page-content
                 // TABLE
