@@ -111,20 +111,8 @@ module.exports = function(app, passport) {
               res.render('create-group.pug')
             });
 
-            app.get('/groupgoal/:id', function(req, res) {
-              var id = req.params.id;
-              Group.findOne({
-                '_id': id
-              }, function(err, group){
-                if(err)
-                  throw err;
-                res.render('new-group-goal.pug', {group: group});
-                console.log(group);
-              })
-            });
-
             // creates a new group with attributes of name and password
-            app.post('/createnewgroup', function(req, res) {
+            app.post('/createnewgroup', isLoggedIn, function(req, res) {
 
               var groupName = req.body.groupname;
               var password = req.body.password;
@@ -152,6 +140,18 @@ module.exports = function(app, passport) {
                 res.redirect('/group/' + groupid);
               });
             }); // end of post
+
+            app.get('/groupgoal/:id', function(req, res) {
+              var id = req.params.id;
+              Group.findOne({
+                '_id': id
+              }, function(err, group){
+                if(err)
+                  throw err;
+                res.render('new-group-goal.pug', {group: group});
+                console.log(group);
+              })
+            });
 
             app.post('/create-new-group-goal', function(req, res){
                 console.log(req.body.group);
@@ -243,7 +243,7 @@ module.exports = function(app, passport) {
            //handle it
         })
 
-        res.redirect('/new-goal')
+        res.redirect('/goals')
     })
 
     app.get('/goals', isLoggedIn, function(req, res) {
