@@ -156,7 +156,7 @@ module.exports = function(app, passport) {
             });
 
             app.post('/create-new-group-goal', function(req, res){
-                console.log(req.body.group);
+                console.log(req.body);
                 addedGoals = req.group.group.groupgoals;
                 var tasks = [];
                 for (var i = 0; i < req.body.taskName.length; i++){
@@ -179,6 +179,7 @@ module.exports = function(app, passport) {
                 })
 
                 res.redirect('/group-home')
+
             })
 
             app.get('/group-home', function(req, res) {
@@ -237,17 +238,35 @@ module.exports = function(app, passport) {
 
         res.render('new-goal.pug');
     });
+
+    app.get('/new-group-goal', isLoggedIn, function(req, res) {
+
+               Group.find({}, function(err, group){
+                if(err)
+                  throw err;
+                res.render('new-group-goal.pug', {groups: group, user: req.user});
+              })
+    });
    app.post('/create-new-goal', isLoggedIn, function(req, res){
         console.log(req.body);
          addedGoals = req.user.goals;
          var tasks = [];
-         for (var i = 0; i < req.body.taskName.length; i++){
+         if (req.body.taskName[0].length == 1){
              tasks.push({
-                 details: req.body.taskName[i],
-                 weight: req.body.difficulty[i],
-                 dueDate: req.body.dueDate[i],
+                 details: req.body.taskName,
+                 weight: req.body.difficulty,
+                 dueDate: req.body.dueDate,
                  completed: false
              })
+         }else {
+             for (var i = 0; i < req.body.taskName.length; i++){
+                 tasks.push({
+                     details: req.body.taskName[i],
+                     weight: req.body.difficulty[i],
+                     dueDate: req.body.dueDate[i],
+                     completed: false
+                 })
+             }
          }
  
          addedGoals.push({
@@ -261,7 +280,7 @@ module.exports = function(app, passport) {
          })
  
          res.redirect('/new-goal')
-    });
+    });     
 
     app.get('/goals', isLoggedIn, function(req, res) {
         var progresses = [];

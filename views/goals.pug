@@ -11,7 +11,7 @@ html(lang='en')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='description', content='A front-end template that helps you build fast, modern mobile web apps.')
     meta(name='viewport', content='width=device-width, initial-scale=1.0, minimum-scale=1.0')
-    title Material Design Lite
+    title Push Me 
     // Add to homescreen for Chrome on Android
     meta(name='mobile-web-app-capable', content='yes')
     link(rel='icon', sizes='192x192', href='images/android-desktop.png')
@@ -110,7 +110,7 @@ html(lang='en')
                 i Dante
 
         nav.demo-navigation.mdl-navigation.mdl-color--blue-grey-800
-          a.mdl-navigation__link(href='/goals')
+          a.mdl-navigation__link(href='/goal')
             i.mdl-color-text--blue-grey-400.material-icons(role='presentation') assignment
             | Goals
           a.mdl-navigation__link(href='/profile')
@@ -133,6 +133,8 @@ html(lang='en')
         .hover1
           nav.container1
             a.buttons(href='#', tooltip='New Message')
+            a.buttons(href='/new-group-goal', tooltip='Add Group Goal')
+            a.buttons(href='/creategroup', tooltip='New Group')
               i.fa.fa-user-circle-o(aria-hidden='true')
             a.buttons(tooltip='New Goal', href='/new-goal')
         // Simple header with fixed tabs.
@@ -140,7 +142,7 @@ html(lang='en')
           header#ha.mdl-layout__header
             // Tabs
             .mdl-layout__tab-bar.mdl-js-ripple-effect
-              a.mdl-layout__tab.is-active(href='#fixed-tab-1') Individual
+              a.mdl-layout__tab.is-active(href='#fixed-tab-1') Personal
               a.mdl-layout__tab(href='#fixed-tab-2') Group
           main.mdl-layout__content.fadein
             section#fixed-tab-1.mdl-layout__tab-panel.is-active

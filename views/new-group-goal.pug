@@ -1,112 +1,186 @@
+
 doctype html
-// views/signup.ejs
-html
+
+script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+
+meta(http-equiv='content-type', content='text/html; charset=UTF-8')
+meta(name='viewport', content='width=device-width, initial-scale=1')
+link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
+link(rel='stylesheet', href='https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/material.min.css')
+link(rel='stylesheet', href='./css/bootstrap-material-datetimepicker.css')
+link(href='http://fonts.googleapis.com/css?family=Roboto:400,500', rel='stylesheet', type='text/css')
+link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+script(type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
+script(type='text/javascript', src='https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js')
+script(type='text/javascript', src='http://momentjs.com/downloads/moment-with-locales.min.js')
+script(type='text/javascript', src='./js/bootstrap-material-datetimepicker.js')
+
+link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+link(rel='stylesheet', href='https://code.getmdl.io/1.2.1/material.indigo-pink.min.css')
+script(defer='', src='https://code.getmdl.io/1.2.1/material.min.js')
+html(lang='en')
   head
-    title Push Meme
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
-
-    meta(http-equiv='content-type', content='text/html; charset=UTF-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
-    link(rel='stylesheet', href='https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/material.min.css')
-    link(rel='stylesheet', href='./css/bootstrap-material-datetimepicker.css')
-    link(href='http://fonts.googleapis.com/css?family=Roboto:400,500', rel='stylesheet', type='text/css')
-    link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
-    script(type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
-    script(type='text/javascript', src='https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js')
-    script(type='text/javascript', src='http://momentjs.com/downloads/moment-with-locales.min.js')
-    script(type='text/javascript', src='./js/bootstrap-material-datetimepicker.js')
-
-    script.
-      (function(i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r;
-      i[r] = i[r] || function() {
-      (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
-      a = s.createElement(o),
-      m = s.getElementsByTagName(o)[0];
-      a.async = 1;
-      a.src = g;
-      m.parentNode.insertBefore(a, m)
-      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-      ga('create', 'UA-60343429-1', 'auto');
-      ga('send', 'pageview');
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='description', content='A front-end template that helps you build fast, modern mobile web apps.')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, minimum-scale=1.0')
+    title Push Me New Goal
+    // Add to homescreen for Chrome on Android
+    meta(name='mobile-web-app-capable', content='yes')
+    link(rel='icon', sizes='192x192', href='images/android-desktop.png')
+    // Add to homescreen for Safari on iOS
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    meta(name='apple-mobile-web-app-title', content='Material Design Lite')
+    link(rel='apple-touch-icon-precomposed', href='images/ios-desktop.png')
+    // Tile icon for Win8 (144x144 + tile color)
+    meta(name='msapplication-TileImage', content='images/touch/ms-touch-icon-144x144-precomposed.png')
+    meta(name='msapplication-TileColor', content='#3372DF')
+    link(rel='shortcut icon', href='images/favicon.png')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&lang=en')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    link(rel='stylesheet', href='https://code.getmdl.io/1.2.1/material.cyan-light_blue.min.css')
+    link(rel='stylesheet', href='styles.css')
     style.
-      body    { padding-top:80px; }
+      #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+      }
+      a{
+      text-decoration: none!important;
+      }
   body
-
-    .container
-      .col-sm-6.col-sm-offset-3
-        h1
-          span.fa.fa-sign-in
-          |  New Group Goal
+    .demo-layout.mdl-layout.mdl-js-layout.mdl-layout--fixed-drawer.mdl-layout--fixed-header
+      header.demo-header.mdl-layout__header.mdl-color--grey-100.mdl-color-text--grey-600
+        .mdl-layout__header-row
+          span.mdl-layout-title PUSHME.ME
+          .mdl-layout-spacer
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable
+            label.mdl-button.mdl-js-button.mdl-button--icon(for='search')
+              i.material-icons search
+            .mdl-textfield__expandable-holder
+              input#search.mdl-textfield__input(type='text')
+              label.mdl-textfield__label(for='search') Enter your query...
+          button#hdrbtn.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-button--icon
+            i.material-icons more_vert
+          ul.mdl-menu.mdl-js-menu.mdl-js-ripple-effect.mdl-menu--bottom-right(for='hdrbtn')
+            li.mdl-menu__item About
+            li.mdl-menu__item Contact
+            // <li class="mdl-menu__item">Legal information</li>
+      .demo-drawer.mdl-layout__drawer.mdl-color--blue-grey-900.mdl-color-text--blue-grey-50
+        header.demo-drawer-header
+            span hello@example.com
+            .mdl-layout-spacer
+            button#accbtn.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-button--icon
+              span.visuallyhidden Accounts
+        nav.demo-navigation.mdl-navigation.mdl-color--blue-grey-800
+          a.mdl-navigation__link(href='/goal')
+            i.mdl-color-text--blue-grey-400.material-icons(role='presentation') home
+            | Goals
+          a.mdl-navigation__link(href='/profile')
+            i.mdl-color-text--blue-grey-400.material-icons(role='presentation') inbox
+            | Profile
+          a.mdl-navigation__link(href='/group')
+            i.mdl-color-text--blue-grey-400.material-icons(role='presentation') people
+            | Groups
+          a.mdl-navigation__link(href='')
+            i.mdl-color-text--blue-grey-400.material-icons(role='presentation') forum
+            | Messages
+          a.mdl-navigation__link(href='/logout')
+            i.mdl-color-text--blue-grey-400.material-icons(role='presentation') flag
+            | Log Out
+          .mdl-layout-spacer
+          a.mdl-navigation__link(href='')
+            i.mdl-color-text--blue-grey-400.material-icons(role='presentation') help_outline
+            span.visuallyhidden Help
+      main.mdl-layout__content.mdl-color--grey-100
+        .hover1
+          nav.container1
+            a.buttons(href='#', tooltip='New Message')
+            a.buttons(href='/new-group-goal', tooltip='Add Group Goal')
+            a.buttons(href='/creategroup', tooltip='New Group')
+              i.fa.fa-user-circle-o(aria-hidden='true')
+            a.buttons(tooltip='New Goal', href='/new-goal')
+        style.
+          .mdl-layout__content{
+            padding: 10px;
+          }
+          .demo-card-wide.mdl-card {
+          position: relative;
+          padding: 5px;
+          margin: 30px;
+          width: 95%;
+          }
+          .demo-card-wide > .mdl-card__menu {
+            display: none;
+          }
+          .mdl-card__title{
+            color: darkgrey!important;
+          }
+          .mdl-button--red{
+          color: #F44336;
+          }
 
         form(action='/create-new-group-goal', method='post')
-          .formgroup
-            label Goal Name
-            input(type='text', name='goalName')
-          .formgroup(id="task")
-            label Task
-            input(type='text', name='taskName')
-            br
-            label Due Date and Time
-            input#date-format(name = 'dueDate' type='text', placeholder='Begin Date Time')
-            br
+            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label Goal Name
+              input#sample3.mdl-textfield__input(type='text', name='goalName') 
+              br
+              br
+              label Group
+              select(name='groupname', form='carform')
+                each group in groups
+                  if group.owner == user.id
+                    option(value=group.name)=group.name
 
-            label Difficulty
-            select(name='difficulty',value=10)
-              option(value='1') Very Easy
-              option(value='2') Easy
-              option(value='3') Normal
-              option(value='4') Hard
-              option(value='5') Very Hard
-          a(id="add_more") More tasks
-          br
+            button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent(type='submit') Create goal
+            script(type='text/javascript').
+              $(document).ready(function()
+              {
+              $('#date').bootstrapMaterialDatePicker
+              ({
+              time: false,
+              clearButton: true
+              });
+              $('#time').bootstrapMaterialDatePicker
+              ({
+              date: false,
+              shortTime: false,
+              format: 'HH:mm'
+              });
+              $('.datePicker').bootstrapMaterialDatePicker
+              ({
+              format: 'dddd DD MMMM YYYY - HH:mm'
+              });
+              $('#date-fr').bootstrapMaterialDatePicker
+              ({
+              format: 'DD/MM/YYYY HH:mm',
+              lang: 'fr',
+              weekStart: 1,
+              cancelText : 'ANNULER',
+              nowButton : true,
+              switchOnClick : true
+              });
+              $('#date-end').bootstrapMaterialDatePicker
+              ({
+              weekStart: 0, format: 'DD/MM/YYYY HH:mm'
+              });
+              $('#date-start').bootstrapMaterialDatePicker
+              ({
+              weekStart: 0, format: 'DD/MM/YYYY HH:mm', shortTime : true
+              }).on('change', function(e, date)
+              {
+              $('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
+              });
+              $('#min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+              $.material.init()
+              });
+            script.
+              $('#add_more').click(function () {
 
-          button.btn.btn-warning.btn-lg(type='submit') Create goal
-    script(type='text/javascript').
-      $(document).ready(function()
-      {
-      $('#date').bootstrapMaterialDatePicker
-      ({
-      time: false,
-      clearButton: true
-      });
-      $('#time').bootstrapMaterialDatePicker
-      ({
-      date: false,
-      shortTime: false,
-      format: 'HH:mm'
-      });
-      $('#date-format').bootstrapMaterialDatePicker
-      ({
-      format: 'dddd DD MMMM YYYY - HH:mm'
-      });
-      $('#date-fr').bootstrapMaterialDatePicker
-      ({
-      format: 'DD/MM/YYYY HH:mm',
-      lang: 'fr',
-      weekStart: 1,
-      cancelText : 'ANNULER',
-      nowButton : true,
-      switchOnClick : true
-      });
-      $('#date-end').bootstrapMaterialDatePicker
-      ({
-      weekStart: 0, format: 'DD/MM/YYYY HH:mm'
-      });
-      $('#date-start').bootstrapMaterialDatePicker
-      ({
-      weekStart: 0, format: 'DD/MM/YYYY HH:mm', shortTime : true
-      }).on('change', function(e, date)
-      {
-      $('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
-      });
-      $('#min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
-      $.material.init()
-      });
-    script.
-      $('#add_more').click(function () {
-
-      $(this).before($("#task").clone());
-      });
+              $(this).before($("#task").clone());
+              });
