@@ -2,11 +2,10 @@
 var mongoose = require('mongoose');
 
 var groupSchema = mongoose.Schema({
-
-  group : {
     name: String,
     password: String,
-    members: [],
+    owner: String,
+    members: [String],
 
     groupgoals: [{
         details: String,
@@ -18,8 +17,6 @@ var groupSchema = mongoose.Schema({
         user:String
       }]
     }]
-
-  }
 
 });
 

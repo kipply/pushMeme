@@ -107,15 +107,23 @@ html(lang='en')
           .mdl-button--red{
           color: #F44336;
           }
+          .demo-card-square.mdl-card {
+              width: 320px;
+              height: 320px;
+              }
+              .demo-card-square > .mdl-card__title {
+              color: #fff;
+              background:
+              url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
+              }
 
         style.
           .demo-card-wide.mdl-card {
-          width: 50%;
+          width: 95%;
           padding: 30px;
           }
           .demo-card-wide > .mdl-card__title {
           color: #fff;
-          height: 176px;
           background: url('../assets/demos/welcome_card.jpg') center / cover;
           }
           .demo-card-wide > .mdl-card__menu {
@@ -139,3 +147,16 @@ html(lang='en')
                 input.mdl-textfield__input(type='text', name='search')
               button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent(type='submit')
                 | Search
+
+        .demo-card-wide.mdl-card.mdl-shadow--2dp
+            span.fa.fa-join-group
+            |  Your Groups
+            each group in groups
+              if group.owner == user.id
+                li.mdl-list__item
+                  span.mdl-list__item-primary-content=group.name
+                    i.mdl-color-text--blue-grey-400.material-icons(role='presentation') star
+              each member in group.members
+                if member == user.id
+                  li.mdl-list__item
+                    span.mdl-list__item-primary-content=group.name              

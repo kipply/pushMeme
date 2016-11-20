@@ -134,15 +134,15 @@ html(lang='en')
             .group(id="task")
 
               .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                input#sample3.mdl-textfield__input(type='text', name='taskName')
+                input.mdl-textfield__input(type='text', name='taskName', required)
                 label.mdl-textfield__label(for='sample3') Task
 
               .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                input.date-format.mdl-textfield__input(type='text', name='dueDate', placeholder="Due Date")
+                input.date-format.mdl-textfield__input(type='text', name='dueDate', placeholder="Due Date", required)
                 label.mdl-textfield__label Add Date
 
                 label Difficulty
-                select(name='difficulty',value=10)
+                select(name='difficulty', required)
                   option(value='1') Very Easy
                   option(value='2') Easy
                   option(value='3') Normal
