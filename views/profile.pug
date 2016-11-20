@@ -130,11 +130,8 @@ html(lang='en')
                 span=user.local.email
                 
             ul
-              - for (var i = 0; i < badges.length; i++) {
-                - var badge = badges[i]
+                each badge in badges 
                   li=badge.name
-                 //img(src=badge.fileName)
-              - }
               
           .mdl-card__actions.mdl-card--border
             if (!user.facebook.token)
