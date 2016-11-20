@@ -10,8 +10,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
-<<<<<<< HEAD
-var configDB = require('./config/database.js');
 
 mongoose.connect('mongodb://wow:wow@ds151927.mlab.com:51927/boop'); // connect to our database
 
