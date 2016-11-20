@@ -110,7 +110,7 @@ html(lang='en')
                 i Dante
 
         nav.demo-navigation.mdl-navigation.mdl-color--blue-grey-800
-          a.mdl-navigation__link(href='/goal')
+          a.mdl-navigation__link(href='/goals')
             i.mdl-color-text--blue-grey-400.material-icons(role='presentation') assignment
             | Goals
           a.mdl-navigation__link(href='/profile')
@@ -171,6 +171,7 @@ html(lang='en')
                               if goals[i].tasks[x].completed
                                 input.mdl-checkbox__input(type='checkbox', id=goals[i]._id+"-"+goals[i].tasks[x]._id, onclick ='updateCompletion(this)' checked)
                               else
+
                                 input.mdl-checkbox__input(type='checkbox', id=goals[i]._id+"-"+goals[i].tasks[x]._id, onclick ='updateCompletion(this)')
                           td.mdl-data-table__cell--non-numeric=goals[i].tasks[x].details
                           td=goals[i].tasks[x].dueDate
@@ -181,7 +182,6 @@ html(lang='en')
                                 window.location = '/tasks/:'+id+"/"+":true";
                               } else{
                                 window.location = '/tasks/:'+id+"/"+":false";
-                                all = false;
                               }
                             }
 

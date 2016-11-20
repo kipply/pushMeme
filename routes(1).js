@@ -238,16 +238,24 @@ module.exports = function(app, passport) {
     app.post('/create-new-goal', isLoggedIn, function(req, res){
         console.log(req.body);
         addedGoals = req.user.goals;
-        var tasks = [];
-        for (var i = 0; i < req.body.taskName.length; i++){
-            tasks.push({
-                details: req.body.taskName[i],
-                weight: req.body.difficulty[i],
-                dueDate: req.body.dueDate[i],
-                completed: false
-            })
-        }
-
+        var tasks = [];         
+        if (req.body.taskName[0].length == 1){
+             tasks.push({
+                 details: req.body.taskName,
+                 weight: req.body.difficulty,
+                 dueDate: req.body.dueDate,
+                 completed: false
+             })
+         }else {
+             for (var i = 0; i < req.body.taskName.length; i++){
+                 tasks.push({
+                     details: req.body.taskName[i],
+                     weight: req.body.difficulty[i],
+                     dueDate: req.body.dueDate[i],
+                     completed: false
+                 })
+             }
+         }
         addedGoals.push({
             details: req.body.goalName,
             tasks:tasks
