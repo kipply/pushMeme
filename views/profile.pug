@@ -87,7 +87,7 @@ html(lang='en')
           nav.container1
             a.buttons(href='#', tooltip='New Message')
             a.buttons(href='/new-goal', tooltip='Add Goal')
-            a.buttons(href='#', tooltip='New Channel')
+            a.buttons(href='/creategroup', tooltip='New Channel')
             a.buttons(href='#', tooltip='Join Channel')
               i.fa.fa-user-circle-o(aria-hidden='true')
             a.buttons(tooltip='Share', href='#')
@@ -113,7 +113,7 @@ html(lang='en')
 
         .demo-card-wide.mdl-card.mdl-shadow--2dp
           .mdl-card__title
-            h2.mdl-card__title-text 
+            h2.mdl-card__title-text
               if (user.facebook.token)
                 span=" " + user.facebook.name
               else if (user.google.token)
@@ -122,8 +122,8 @@ html(lang='en')
                 span=user.local.email
           .mdl-card__supporting-text
 
-            p 
-              b Email: 
+            p
+              b Email:
               if (user.google.token)
                 span=user.google.email
               else if (user.facebook.token)
