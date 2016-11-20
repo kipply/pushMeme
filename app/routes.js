@@ -83,24 +83,27 @@ var Group = require('../app/models/group.js');
                 failureRedirect : '/'
             }));
 
+            // takes you to the group home page where you can join group or search for groups
             app.get('/group', function(req, res) {
               res.render('group.pug')
             })
 
+            // takes you to the create a group page
             app.get('/creategroup', function(req, res) {
               res.render('create-group.pug')
             })
 
+            // creates a new group with attributes of name and password
             app.post('/createnewgroup', function(req, res) {
-              let groupName = req.body.groupname;
-              let password = req.body.password;
+              var groupName = req.body.groupname;
+              var password = req.body.password;
               console.log(req.body.password);
-              //let temp = req.body.groupname;
-              //console.log(temp);
-              let newgroup = new Group();
 
-              newgroup.group.gname = groupName;
-              newgroup.group.gpassword = password;
+              var newgroup = new Group();
+
+              // sets the attributes from the forms
+              newgroup.group.name = groupName;
+              newgroup.group.password = password;
 
               console.log(newgroup);
               newgroup.save(function(err, savedGroup) {
@@ -113,14 +116,8 @@ var Group = require('../app/models/group.js');
                   console.log("Group not saved");
                 }
               });
-
               res.redirect('/group')
             });
-
-            app.get('/group', function(req, res) {
-              res.render('group.pug', { message: req.flash('signupMessage')});
-            });
-
 
             app.get('/joingroup', function(req, res) {
               res.redirect()
