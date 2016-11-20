@@ -133,8 +133,6 @@ html(lang='en')
         .hover1
           nav.container1
             a.buttons(href='#', tooltip='New Message')
-            a.buttons(href='/new-group-goal', tooltip='Add Group Goal')
-            a.buttons(href='/creategroup', tooltip='New Group')
               i.fa.fa-user-circle-o(aria-hidden='true')
             a.buttons(tooltip='New Goal', href='/new-goal')
         // Simple header with fixed tabs.
@@ -142,8 +140,8 @@ html(lang='en')
           header#ha.mdl-layout__header
             // Tabs
             .mdl-layout__tab-bar.mdl-js-ripple-effect
-              a.mdl-layout__tab.is-active(href='#fixed-tab-1') Individual 
-              a.mdl-layout__tab(href='#fixed-tab-2') Group 
+              a.mdl-layout__tab.is-active(href='#fixed-tab-1') Individual
+              a.mdl-layout__tab(href='#fixed-tab-2') Group
           main.mdl-layout__content.fadein
             section#fixed-tab-1.mdl-layout__tab-panel.is-active
               .page-content
@@ -180,7 +178,7 @@ html(lang='en')
                               var id = $(el).attr('id').substring(4, $(el).attr('id').length);
                               if($(el).is(':checked')){
                                 window.location = '/tasks/:'+id+"/"+":true";
-                              } else{ 
+                              } else{
                                 window.location = '/tasks/:'+id+"/"+":false";
                               }
                             }

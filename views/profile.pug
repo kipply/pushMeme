@@ -110,7 +110,7 @@ html(lang='en')
 
         .demo-card-wide.mdl-card.mdl-shadow--2dp
           .mdl-card__title
-            h2.mdl-card__title-text 
+            h2.mdl-card__title-text
               if (user.facebook.token)
                 span=" " + user.facebook.name
               else if (user.google.token)
@@ -119,14 +119,22 @@ html(lang='en')
                 span=user.local.email
           .mdl-card__supporting-text
 
-            p 
-              b Email: 
+            p
+              b Email:
               if (user.google.token)
                 span=user.google.email
               else if (user.facebook.token)
                 span=user.facebook.email
               else
                 span=user.local.email
+                
+            ul
+              - for (var i = 0; i < badges.length; i++) {
+                - var badge = badges[i]
+                  li=badge.name
+                 //img(src=badge.fileName)
+              - }
+              
           .mdl-card__actions.mdl-card--border
             if (!user.facebook.token)
               a.mdl-button.mdl-js-button.mdl-button--primary(href='/connect/facebook') Connect Facebook

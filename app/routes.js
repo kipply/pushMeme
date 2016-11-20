@@ -1,5 +1,5 @@
 var User = require('../app/models/user.js');
-
+var Badge = require('../app/models/badge.js');
 var Group = require('../app/models/group.js');
 
 
@@ -9,8 +9,11 @@ module.exports = function(app, passport) {
     });
 
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.pug', {
-            user : req.user
+        Badge.find({}, function(err, badges) {
+          res.render('profile.pug', {
+            user : req.user,
+            badges: badges
+          });
         });
     });
 
@@ -110,20 +113,8 @@ module.exports = function(app, passport) {
               res.render('create-group.pug')
             });
 
-            app.get('/groupgoal/:id', function(req, res) {
-              var id = req.params.id;
-              Group.findOne({
-                '_id': id
-              }, function(err, group){
-                if(err)
-                  throw err;
-                res.render('new-group-goal.pug', {group: group});
-                console.log(group);
-              })
-            });
-
             // creates a new group with attributes of name and password
-            app.post('/createnewgroup', function(req, res) {
+            app.post('/createnewgroup', isLoggedIn, function(req, res) {
 
               var groupName = req.body.groupname;
               var password = req.body.password;
@@ -151,6 +142,18 @@ module.exports = function(app, passport) {
                 res.redirect('/group/' + groupid);
               });
             }); // end of post
+
+            app.get('/groupgoal/:id', function(req, res) {
+              var id = req.params.id;
+              Group.findOne({
+                '_id': id
+              }, function(err, group){
+                if(err)
+                  throw err;
+                res.render('new-group-goal.pug', {group: group});
+                console.log(group);
+              })
+            });
 
             app.post('/create-new-group-goal', function(req, res){
                 console.log(req.body.group);
@@ -238,7 +241,6 @@ module.exports = function(app, passport) {
         console.log(req.body);
          addedGoals = req.user.goals;
          var tasks = [];
-         if (req.body.taskName)
          for (var i = 0; i < req.body.taskName.length; i++){
              tasks.push({
                  details: req.body.taskName[i],
@@ -259,7 +261,7 @@ module.exports = function(app, passport) {
          })
  
          res.redirect('/new-goal')
-     })
+    });
 
     app.get('/goals', isLoggedIn, function(req, res) {
         var progresses = [];
@@ -272,7 +274,19 @@ module.exports = function(app, passport) {
                     numer += req.user.goals[i].tasks[j].weight;
                 }
             }
-            progresses.push(Math.round(numer/denom*100))
+            progresses.push(Math.round(numer/denom*100));
+            if (Math.round(numer/denom*100) == 100) {
+              console.log("YAY");
+              console.log(req.user.goals[i].details);
+              var badge = new Badge({
+                name: req.user.goals[i].details,
+                user: req.user.id,
+                fileName: null
+              })
+              badge.save()
+              req.user.goals.splice(i,1);
+            }
+
         }
         res.render('goals.pug', {goals: req.user.goals, progresses: progresses});
     });
