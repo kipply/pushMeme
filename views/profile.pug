@@ -129,8 +129,8 @@ html(lang='en')
                 span=user.local.email
                 
             ul
-                each badge in badges 
-                  li=badge.name
+              each badge in badges 
+                li=badge.name
               
           .mdl-card__actions.mdl-card--border
             if (!user.facebook.token)
