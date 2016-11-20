@@ -56,7 +56,7 @@ html(lang='en')
             // <li class="mdl-menu__item">Legal information</li>
       .demo-drawer.mdl-layout__drawer.mdl-color--blue-grey-900.mdl-color-text--blue-grey-50
         header.demo-drawer-header
-            span hello@example.com
+            img(src='title.svg')
             .mdl-layout-spacer
             button#accbtn.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-button--icon
               span.visuallyhidden Accounts
@@ -80,7 +80,6 @@ html(lang='en')
       main.mdl-layout__content.mdl-color--grey-100
         .hover1
           nav.container1
-            a.buttons(href='#', tooltip='New Message')
             a.buttons(href='/new-group-goal', tooltip='Add Group Goal')
             a.buttons(href='/creategroup', tooltip='New Group')
               i.fa.fa-user-circle-o(aria-hidden='true')
@@ -134,8 +133,8 @@ html(lang='en')
                 input.mdl-textfield__input( name='joinpassword')
                 label.mdl-textfield__label Group Code
               button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent(type='submit')
-                | Join! 
-      
+                | Join!
+
 
         .demo-card-wide.mdl-card.mdl-shadow--2dp
             span.fa.fa-join-group
@@ -148,4 +147,4 @@ html(lang='en')
               each member in group.members
                 if member == user.id
                   li.mdl-list__item
-                    span.mdl-list__item-primary-content=group.name     
+                    span.mdl-list__item-primary-content=group.name

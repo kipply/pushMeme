@@ -67,7 +67,7 @@ html(lang='en')
             // <li class="mdl-menu__item">Legal information</li>
       .demo-drawer.mdl-layout__drawer.mdl-color--blue-grey-900.mdl-color-text--blue-grey-50
         header.demo-drawer-header
-            span=user.name
+            img(src='title.svg')
             .mdl-layout-spacer
             button#accbtn.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-button--icon
               span.visuallyhidden Accounts
@@ -91,7 +91,6 @@ html(lang='en')
       main.mdl-layout__content.mdl-color--grey-100
         .hover1
           nav.container1
-            a.buttons(href='#', tooltip='New Message')
             a.buttons(href='/new-group-goal', tooltip='Add Group Goal')
             a.buttons(href='/creategroup', tooltip='New Group')
               i.fa.fa-user-circle-o(aria-hidden='true')
