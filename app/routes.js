@@ -1,5 +1,5 @@
 var User = require('../app/models/user.js');
-
+var Badge = require('../app/models/badge.js');
 var Group = require('../app/models/group.js');
 
 
@@ -260,7 +260,14 @@ module.exports = function(app, passport) {
                     console.log("IF")
                 }
             }
-            progresses.push(Math.round(numer/denom*100))
+            progresses.push(Math.round(numer/denom*100));
+            if (progresses(Math.round(numer/denom*100)) == 100) {
+              var badge = new Badge({
+                name: req.user.goals[i].name,
+                fileName: null
+              })
+            });
+
         }
         res.render('goals.pug', {goals: req.user.goals, progresses: progresses});
     });
