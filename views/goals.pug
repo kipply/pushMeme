@@ -116,6 +116,13 @@ html(lang='en')
                           this.MaterialProgress.setProgress(40);
                           });
                   tbody
+                    
+                    each item in goals
+                      b=item.details
+                      br
+                      each task in item.tasks
+                        p=task.details
+                        p=task.dueDate
                     tr
                       td.mdl-data-table__cell--non-numeric Drink 8 Cups of Water 
                     tr
@@ -123,43 +130,6 @@ html(lang='en')
                     tr
                       td.mdl-data-table__cell--non-numeric Eat 6 Servings of Veggies
                 br
-                // another
-                table#my-table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable.mdl-shadow--2dp
-                  thead#heading1
-                    tr
-                      th#goal1.mdl-data-table__cell--non-numeric
-                        | LEARN PIANO
-                        #p1.mdl-progress.mdl-js-progress
-                        script.
-                          document.querySelector('#p1').addEventListener('mdl-componentupgraded', function() {
-                          this.MaterialProgress.setProgress(44);
-                          });
-                  tbody
-                    tr
-                      td.mdl-data-table__cell--non-numeric Play Scales 
-                    tr
-                      td.mdl-data-table__cell--non-numeric Listen to Covers
-                    tr
-                      td.mdl-data-table__cell--non-numeric Watch YouTube Videos
-                br
-                // another one
-                table#my-table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable.mdl-shadow--2dp
-                  thead#heading1
-                    tr
-                      th#goal1.mdl-data-table__cell--non-numeric
-                        | LEARN PIANO
-                        #p3.mdl-progress.mdl-js-progress
-                        script.
-                          document.querySelector('#p3').addEventListener('mdl-componentupgraded', function() {
-                          this.MaterialProgress.setProgress(90);
-                          });
-                  tbody
-                    tr
-                      td.mdl-data-table__cell--non-numeric Play Scales 
-                    tr
-                      td.mdl-data-table__cell--non-numeric Listen to Covers
-                    tr
-                      td.mdl-data-table__cell--non-numeric Watch YouTube Videos
             section#fixed-tab-2.mdl-layout__tab-panel
               .page-content
                 // TABLE
@@ -267,10 +237,3 @@ html(lang='en')
           g#Layer_4
             polygon(stroke-miterlimit='10', points='469.3,222.7 1,222.7 48.7,166.7 155.7,188.3 212,132.7\
             296.7,128 380.7,184.3 436.7,125   ')
-        //- each item in goals
-        //-   b=item.details
-        //-   br
-        //-   each task in item.tasks
-        //-     p=task.details
-        //-     p=task.dueDate
-        //-       
