@@ -9,13 +9,13 @@ var groupSchema = mongoose.Schema({
     members: [],
 
     groupgoals: [{
-      details: String,
+        details: String,
       tasks:[{
         details: String,
         weight: Number,
-        endDate: String,
-        public: Boolean,
-        user: String
+        dueDate: String,
+        completed: Boolean,
+        user:String
       }]
     }]
 

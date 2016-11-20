@@ -6,8 +6,6 @@ link(rel='stylesheet', href='https://code.getmdl.io/1.2.1/material.indigo-pink.m
 script(defer='', src='https://code.getmdl.io/1.2.1/material.min.js')
 html(lang='en')
   head
-    script(src='https://code.jquery.com/jquery-3.1.1.min.js', integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=', crossorigin='anonymous')
-
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='description', content='A front-end template that helps you build fast, modern mobile web apps.')
@@ -32,7 +30,6 @@ html(lang='en')
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
     link(rel='stylesheet', href='https://code.getmdl.io/1.2.1/material.cyan-light_blue.min.css')
     link(rel='stylesheet', href='styles.css')
-
     style.
       #view-source {
       position: fixed;
@@ -107,6 +104,7 @@ html(lang='en')
           header#ha.mdl-layout__header
             // Tabs
             .mdl-layout__tab-bar.mdl-js-ripple-effect
+<<<<<<< HEAD
               a.mdl-layout__tab.is-active(href='#fixed-tab-1') Individual 
               a.mdl-layout__tab(href='#fixed-tab-2') Group 
           main.mdl-layout__content.fadein
@@ -158,7 +156,7 @@ html(lang='en')
                   thead#heading4
                     tr
                       th#goal1.mdl-data-table__cell--non-numeric
-                        | PROMOTE GENDER EQUALITY 
+                        | PROMOTE GENDER EQUALITY
                         #p2.mdl-progress.mdl-js-progress
                         script.
                           document.querySelector('#p2').addEventListener('mdl-componentupgraded', function() {
@@ -166,7 +164,7 @@ html(lang='en')
                           });
                   tbody
                     tr
-                      td.mdl-data-table__cell--non-numeric Join WISE 
+                      td.mdl-data-table__cell--non-numeric Join WISE
                     tr
                       td.mdl-data-table__cell--non-numeric Attend TheLadyHacks
                     tr
@@ -204,7 +202,7 @@ html(lang='en')
                           });
                   tbody
                     tr
-                      td.mdl-data-table__cell--non-numeric Do Homework 
+                      td.mdl-data-table__cell--non-numeric Do Homework
                     tr
                       td.mdl-data-table__cell--non-numeric Keep Going
                     tr
@@ -258,3 +256,10 @@ html(lang='en')
           g#Layer_4
             polygon(stroke-miterlimit='10', points='469.3,222.7 1,222.7 48.7,166.7 155.7,188.3 212,132.7\
             296.7,128 380.7,184.3 436.7,125   ')
+        //- each item in goals
+        //-   b=item.details
+        //-   br
+        //-   each task in item.tasks
+        //-     p=task.details
+        //-     p=task.dueDate
+        //-
