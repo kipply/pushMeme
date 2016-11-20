@@ -174,7 +174,6 @@ html(lang='en')
                           td=goals[i].tasks[x].dueDate
                           script.
                             function updateCompletion(el) {
-                              var all = true;
                               var id = $(el).attr('id').substring(4, $(el).attr('id').length);
                               if($(el).is(':checked')){
                                 window.location = '/tasks/:'+id+"/"+":true";
@@ -182,25 +181,7 @@ html(lang='en')
                                 window.location = '/tasks/:'+id+"/"+":false";
                                 all = false;
                               }
-
-                              if (!all) {
-                                conf();
-                              }
                             }
-                            function conf() {
-                              if (window.confirm("Are you sure you completed this goal?")) {
-                                console.log("YAY");
-                                console.log(req.user.goals[i].details);
-                                var badge = new Badge({
-                                  name: req.user.goals[i].details,
-                                  user: req.user.id,
-                                  fileName: null
-                                })
-                                badge.save()
-                                req.user.goals.splice(i,1);
-                              } else {
-
-                              }
 
 
             section#fixed-tab-2.mdl-layout__tab-panel
