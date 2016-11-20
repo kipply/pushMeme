@@ -20,8 +20,11 @@ module.exports = function(app, passport) {
             console.log(badges.length);
             res.render('profile.pug', {
               user : req.user,
-              badges: badges
+              badges: badges,
+              name: req.user.name
             })
+            console.log(req.user.name);
+
           } else {
             console.log("no data");
             res.render('profile.pug');
