@@ -325,3 +325,23 @@ _:-ms-input-placeholder, :root .demo-graph {
   box-sizing: border-box;
   align-items: center;
 }
+//animations
+    
+.scrollanim {visibility:hidden;}
+    
+.fadein{
+    visibility: visible;
+    .keyframes(fadein;{
+        0% {
+            opacity: 0; 
+        }
+        100% { 
+            opacity: 1;   
+        }
+    });
+    .animation(fadein 0.8s);
+    h2, 
+    p{
+        animation-delay: .5s;
+    }
+}

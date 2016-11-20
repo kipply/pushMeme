@@ -184,10 +184,56 @@ var Group = require('../app/models/group.js');
     })
 
     app.get('/goals', isLoggedIn, function(req, res) {
-        res.render('goals.pug', {goals: req.user.goals});
+        var progresses = [];
+        for (var i = 0; i < req.user.goals.length; i++){
+            console.log("WOW")
+            denom = 0
+            numer = 0
+            for (var j = 0; j < req.user.goals[i].tasks.length; j++){
+                console.log("LOOP");
+                denom += req.user.goals[i].tasks[j].weight; 
+                if (req.user.goals[i].tasks[j].completed){
+                    numer += req.user.goals[i].tasks[j].weight; 
+                    console.log("IF")
+                }
+            }
+            progresses.push(Math.round(numer/denom*100))
+        }
+        res.render('goals.pug', {goals: req.user.goals, progresses: progresses});
     });
-    app.get('/users/:userId/books/:bookId', function (req, res) {
-      res.send(req.params)
+
+    app.get('/tasks/:id/:true', isLoggedIn, function (req, res) {
+        console.log(req.params.id)
+        var goal = req.params.id.split("-")[0]; 
+        var task = req.params.id.split("-")[1];
+        updatedGoals = req.user.goals;
+        for (var i = 0; i < req.user.goals.length; i++){
+            if (req.user.goals[i].id = goal){
+                console.log("FOUND GOAL");
+                for (var j = 0; j < req.user.goals[i].tasks.length; j++){
+                    console.log(req.user.goals[i].tasks[j].id + " " + task);
+                    if (req.user.goals[i].tasks[j].id == task){
+
+                        console.log("FOUND TASK");
+                        console.log(req.params.true);
+                        if (req.params.true == ":true"){
+                            req.user.goals[i].tasks[j].completed = true;
+                            console.log("Marked true");
+                        } else{
+                            req.user.goals[i].tasks[j].completed = false;
+                        }
+                    }
+                }
+            }
+        }
+        console.log(updatedGoals[1] );
+        User.update({_id: req.user._id}, {
+            goals: updatedGoals
+        }, function(err, numberAffected, rawResponse) {
+           //handle it
+        })
+
+      res.redirect('/goals')
     })
 
 

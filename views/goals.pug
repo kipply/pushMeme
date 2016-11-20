@@ -1,5 +1,6 @@
 
 doctype html
+link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
 link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
 link(rel='stylesheet', href='https://code.getmdl.io/1.2.1/material.indigo-pink.min.css')
 script(defer='', src='https://code.getmdl.io/1.2.1/material.min.js')
@@ -41,6 +42,10 @@ html(lang='en')
       margin-right: 40px;
       margin-bottom: 40px;
       z-index: 900;
+      }
+      th{
+      padding: 15px!important;
+      padding-bottom: 0px !important;
       }
   body
     .demo-layout.mdl-layout.mdl-js-layout.mdl-layout--fixed-drawer.mdl-layout--fixed-header
@@ -104,40 +109,47 @@ html(lang='en')
             .mdl-layout__tab-bar.mdl-js-ripple-effect
               a.mdl-layout__tab.is-active(href='#fixed-tab-1') Individual 
               a.mdl-layout__tab(href='#fixed-tab-2') Group 
-          main.mdl-layout__content
+          main.mdl-layout__content.fadein
             section#fixed-tab-1.mdl-layout__tab-panel.is-active
               .page-content
                 // TABLE
 
-                each item in goals
+                - for (var i = 0; i < goals.length; i++)
                   br
                   table#my-table.mdl-data-table.mdl-shadow--2dp.mdl-shadow--2dp
                     thead#heading1
                       thead
                       tr
                         th
-                        th#goal1.mdl-data-table__cell--non-numeric=item.details
-                          #p2.mdl-progress.mdl-js-progress
+                        th#goal1.mdl-data-table__cell--non-numeric
+                          span=goals[i].details
+
+                          .progress
+                            .progress-bar(role='progressbar', aria-valuenow=progresses[i], aria-valuemin='0', aria-valuemax='100', style='width: '+progresses[i]+'%')
+                              span=progresses[i]+"% "
                         th Due Date
                     tbody
-                      - for (var x = 0; x < item.tasks.length; x++)
+                      - for (var x = 0; x < goals[i].tasks.length; x++)
                         tr
                           td
-                            label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.mdl-data-table__select(for='row['+item.details+x+']')
-                              input.mdl-checkbox__input(type='checkbox', id='row['+item.details+x+']', onclick ='updateCompletion(this)')
+                            label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect.mdl-data-table__select(for=goals[i]._id+"-"+goals[i].tasks[x]._id)
+                              if goals[i].tasks[x].completed
+                                input.mdl-checkbox__input(type='checkbox', id=goals[i]._id+"-"+goals[i].tasks[x]._id, onclick ='updateCompletion(this)' checked)
+                              else
 
-                          td.mdl-data-table__cell--non-numeric=item.tasks[x].details
-                          td=item.tasks[x].dueDate
+                                input.mdl-checkbox__input(type='checkbox', id=goals[i]._id+"-"+goals[i].tasks[x]._id, onclick ='updateCompletion(this)')
+                          td.mdl-data-table__cell--non-numeric=goals[i].tasks[x].details
+                          td=goals[i].tasks[x].dueDate
                           script.
                             function updateCompletion(el) {
-                              var id = $(el).attr('id');
+                              var id = $(el).attr('id').substring(4, $(el).attr('id').length);
                               if($(el).is(':checked')){
                                 window.location = '/tasks/:'+id+"/"+":true";
-                              } else{
-
+                              } else{ 
                                 window.location = '/tasks/:'+id+"/"+":false";
                               }
                             }
+
 
             section#fixed-tab-2.mdl-layout__tab-panel
               .page-content

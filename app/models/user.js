@@ -23,6 +23,7 @@ var userSchema = mongoose.Schema({
     },
     goals: [{
         details: String,
+        completion: Number,
       tasks:[{
         details: String, 
         weight: Number, 
