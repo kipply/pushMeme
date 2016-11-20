@@ -92,12 +92,6 @@ var Group = require('../app/models/group.js');
             })
 
             app.post('/createnewgroup', function(req, res) {
-              let groupName = req.body.groupname;
-              let password = req.body.password;
-              console.log(req.body.password);
-              //let temp = req.body.groupname;
-              //console.log(temp);
-              let newgroup = new Group();
 
               newgroup.group.gname = groupName;
               newgroup.group.gpassword = password;
