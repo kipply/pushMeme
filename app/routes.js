@@ -100,15 +100,16 @@ module.exports = function(app, passport) {
             }));
 
             // takes you to the group home page where you can join group or search for groups
-            app.get('/group', function(req, res) {
-              res.render('group.pug')
+            app.get('/group', isLoggedIn, function(req, res) {
+               Group.find({}, function(err, group){
+                if(err)
+                  throw err;
+                res.render('group.pug', {groups: group, user: req.user});
+              })
             })
 
-            app.get('/group/:id', function(req, res) {
+            app.get('/group/:id', isLoggedIn, function(req, res) {
               var id = req.params.id;
-              //var group = req.params;
-              //console.log(req.query.name);
-              //console.log("A" + group);
               Group.findOne({
                 '_id': id
               }, function(err, group){
@@ -118,8 +119,6 @@ module.exports = function(app, passport) {
                 console.log(group);
               })
             });
-
-
 
             // takes you to the create a group page
             app.get('/creategroup', function(req, res) {
@@ -136,9 +135,9 @@ module.exports = function(app, passport) {
               var newgroup = new Group();
 
               // sets the attributes from the forms
-              newgroup.group.name = groupName;
-              newgroup.group.password = password;
-              newgroup.group.members = req.user.id;
+              newgroup.name = groupName;
+              newgroup.password = password;
+                  newgroup.owner = req.user.id;
 
               console.log(newgroup);
               newgroup.save(function(err, savedGroup) {
@@ -198,8 +197,23 @@ module.exports = function(app, passport) {
                 res.render('goals-home.pug', {groupgoals: req.group.groupgoals});
             });
 
-            app.get('/joingroup', function(req, res) {
-              res.redirect()
+            app.post('/joingroup', function(req, res) {
+                Group.find({}, function(err, group){
+                    if(err)
+                      throw err;
+                    for (var i = 0; i < group.length; i++){
+                        if (req.body.joinpassword == group[i].password){
+                            updatedMembers = group[i].members; 
+                            updatedMembers.push(req.user.id);
+                            Group.update({_id: group[i].id}, {
+                                members: updatedMembers
+                            }, function(err, numberAffected, rawResponse) {
+                               //handle it
+                            })
+                        }
+                    }
+                    res.render('group.pug', {groups: group, user: req.user});
+                })
             });
 
 
@@ -232,47 +246,44 @@ module.exports = function(app, passport) {
     });
 
     app.get('/new-goal', isLoggedIn, function(req, res) {
+
         res.render('new-goal.pug');
     });
-
-    app.post('/create-new-goal', isLoggedIn, function(req, res){
+   app.post('/create-new-goal', isLoggedIn, function(req, res){
         console.log(req.body);
-        addedGoals = req.user.goals;
-        var tasks = [];
-        for (var i = 0; i < req.body.taskName.length; i++){
-            tasks.push({
-                details: req.body.taskName[i],
-                weight: req.body.difficulty[i],
-                dueDate: req.body.dueDate[i],
-                completed: false
-            })
-        }
-
-        addedGoals.push({
-            details: req.body.goalName,
-            tasks:tasks
-        })
-        User.update({_id: req.user._id}, {
-            goals: addedGoals
-        }, function(err, numberAffected, rawResponse) {
-           //handle it
-        })
-
-        res.redirect('/goals')
-    })
+         addedGoals = req.user.goals;
+         var tasks = [];
+         for (var i = 0; i < req.body.taskName.length; i++){
+             tasks.push({
+                 details: req.body.taskName[i],
+                 weight: req.body.difficulty[i],
+                 dueDate: req.body.dueDate[i],
+                 completed: false
+             })
+         }
+ 
+         addedGoals.push({
+             details: req.body.goalName,
+             tasks:tasks
+         })
+         User.update({_id: req.user._id}, {
+             goals: addedGoals
+         }, function(err, numberAffected, rawResponse) {
+            //handle it
+         })
+ 
+         res.redirect('/new-goal')
+    });
 
     app.get('/goals', isLoggedIn, function(req, res) {
         var progresses = [];
         for (var i = 0; i < req.user.goals.length; i++){
-            console.log("WOW")
             denom = 0
             numer = 0
             for (var j = 0; j < req.user.goals[i].tasks.length; j++){
-                console.log("LOOP");
                 denom += req.user.goals[i].tasks[j].weight;
                 if (req.user.goals[i].tasks[j].completed){
                     numer += req.user.goals[i].tasks[j].weight;
-                    console.log("IF")
                 }
             }
             progresses.push(Math.round(numer/denom*100));
@@ -288,16 +299,11 @@ module.exports = function(app, passport) {
         updatedGoals = req.user.goals;
         for (var i = 0; i < req.user.goals.length; i++){
             if (req.user.goals[i].id = goal){
-                console.log("FOUND GOAL");
                 for (var j = 0; j < req.user.goals[i].tasks.length; j++){
-                    console.log(req.user.goals[i].tasks[j].id + " " + task);
                     if (req.user.goals[i].tasks[j].id == task){
 
-                        console.log("FOUND TASK");
-                        console.log(req.params.true);
                         if (req.params.true == ":true"){
                             req.user.goals[i].tasks[j].completed = true;
-                            console.log("Marked true");
                         } else{
                             req.user.goals[i].tasks[j].completed = false;
                         }
@@ -305,7 +311,6 @@ module.exports = function(app, passport) {
                 }
             }
         }
-        console.log(updatedGoals[1] );
         User.update({_id: req.user._id}, {
             goals: updatedGoals
         }, function(err, numberAffected, rawResponse) {

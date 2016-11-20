@@ -43,7 +43,7 @@ html(lang='en')
     .demo-layout.mdl-layout.mdl-js-layout.mdl-layout--fixed-drawer.mdl-layout--fixed-header
       header.demo-header.mdl-layout__header.mdl-color--grey-100.mdl-color-text--grey-600
         .mdl-layout__header-row
-          span.mdl-layout-title=group.group.name
+          span.mdl-layout-title=group.name
           .mdl-layout-spacer
           .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable
             label.mdl-button.mdl-js-button.mdl-button--icon(for='search')
@@ -89,22 +89,14 @@ html(lang='en')
         .hover1
           nav.container1
             a.buttons(href='#', tooltip='New Message')
-            a.buttons(href='/groupgoal' , tooltip='Add Goal')
-            a.buttons(href='#', tooltip='New Channel')
-            a.buttons(href='#', tooltip='Join Channel')
+            a.buttons(href='/new-group-goal', tooltip='Add Group Goal')
+            a.buttons(href='/creategroup', tooltip='New Group')
               i.fa.fa-user-circle-o(aria-hidden='true')
-            a.buttons(tooltip='Share', href='#')
+            a.buttons(tooltip='New Goal', href='/new-goal')
         // Simple header with fixed tabs.
         .mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--fixed-tabs
-          header#ha.mdl-layout__header
-            // Tabs
-            .mdl-layout__tab-bar.mdl-js-ripple-effect
-              a.mdl-layout__tab.is-active(href='#fixed-tab-1') Individual
-              a.mdl-layout__tab(href='#fixed-tab-2') Group
+
           main.mdl-layout__content
-            section#fixed-tab-1.mdl-layout__tab-panel.is-active
-              .page-content
-                // TABLE
                 table#my-table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable.mdl-shadow--2dp
                   thead#heading1
                     tr
@@ -123,101 +115,7 @@ html(lang='en')
                     tr
                       td.mdl-data-table__cell--non-numeric Eat 6 Servings of Veggies
                 br
-                // another
-                table#my-table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable.mdl-shadow--2dp
-                  thead#heading1
-                    tr
-                      th#goal1.mdl-data-table__cell--non-numeric
-                        | LEARN PIANO
-                        #p1.mdl-progress.mdl-js-progress
-                        script.
-                          document.querySelector('#p1').addEventListener('mdl-componentupgraded', function() {
-                          this.MaterialProgress.setProgress(44);
-                          });
-                  tbody
-                    tr
-                      td.mdl-data-table__cell--non-numeric Play Scales
-                    tr
-                      td.mdl-data-table__cell--non-numeric Listen to Covers
-                    tr
-                      td.mdl-data-table__cell--non-numeric Watch YouTube Videos
-                br
-                // another one
-                table#my-table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable.mdl-shadow--2dp
-                  thead#heading1
-                    tr
-                      th#goal1.mdl-data-table__cell--non-numeric
-                        | LEARN PIANO
-                        #p3.mdl-progress.mdl-js-progress
-                        script.
-                          document.querySelector('#p3').addEventListener('mdl-componentupgraded', function() {
-                          this.MaterialProgress.setProgress(90);
-                          });
-                  tbody
-                    tr
-                      td.mdl-data-table__cell--non-numeric Play Scales
-                    tr
-                      td.mdl-data-table__cell--non-numeric Listen to Covers
-                    tr
-                      td.mdl-data-table__cell--non-numeric Watch YouTube Videos
-            section#fixed-tab-2.mdl-layout__tab-panel
-              .page-content
-                // TABLE
-                table#my-table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable.mdl-shadow--2dp
-                  thead#heading4
-                    tr
-                      th#goal1.mdl-data-table__cell--non-numeric
-                        | PROMOTE GENDER EQUALITY
-                        #p2.mdl-progress.mdl-js-progress
-                        script.
-                          document.querySelector('#p2').addEventListener('mdl-componentupgraded', function() {
-                          this.MaterialProgress.setProgress(40);
-                          });
-                  tbody
-                    tr
-                      td.mdl-data-table__cell--non-numeric Join WISE
-                    tr
-                      td.mdl-data-table__cell--non-numeric Attend TheLadyHacks
-                    tr
-                      td.mdl-data-table__cell--non-numeric Don't Let Others Undermine You
-                br
-                // another
-                table#my-table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable.mdl-shadow--2dp
-                  thead#heading1
-                    tr
-                      th#goal1.mdl-data-table__cell--non-numeric
-                        | END WORLD HUNGER
-                        #p5.mdl-progress.mdl-js-progress
-                        script.
-                          document.querySelector('#p5').addEventListener('mdl-componentupgraded', function() {
-                          this.MaterialProgress.setProgress(66);
-                          });
-                  tbody
-                    tr
-                      td.mdl-data-table__cell--non-numeric Donate to the Food Bank
-                    tr
-                      td.mdl-data-table__cell--non-numeric Volunteer at the Soup Kitchen
-                    tr
-                      td.mdl-data-table__cell--non-numeric Don't Waste Food
-                br
-                // another one
-                table#my-table.mdl-data-table.mdl-js-data-table.mdl-data-table--selectable.mdl-shadow--2dp
-                  thead#heading1
-                    tr
-                      th#goal1.mdl-data-table__cell--non-numeric
-                        | FINISH MATH HOMEWORK
-                        #p6.mdl-progress.mdl-js-progress
-                        script.
-                          document.querySelector('#p6').addEventListener('mdl-componentupgraded', function() {
-                          this.MaterialProgress.setProgress(22);
-                          });
-                  tbody
-                    tr
-                      td.mdl-data-table__cell--non-numeric Do Homework
-                    tr
-                      td.mdl-data-table__cell--non-numeric Keep Going
-                    tr
-                      td.mdl-data-table__cell--non-numeric Don't Give Up
+               
                 br
                 br
                 br
@@ -267,10 +165,3 @@ html(lang='en')
           g#Layer_4
             polygon(stroke-miterlimit='10', points='469.3,222.7 1,222.7 48.7,166.7 155.7,188.3 212,132.7\
             296.7,128 380.7,184.3 436.7,125   ')
-        //- each item in goals
-        //-   b=item.details
-        //-   br
-        //-   each task in item.tasks
-        //-     p=task.details
-        //-     p=task.dueDate
-        //-
