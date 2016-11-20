@@ -21,11 +21,12 @@ var userSchema = mongoose.Schema({
         email        : String,
         name         : String
     },
+
     goals: [{
         details: String,
       tasks:[{
-        details: String, 
-        weight: Number, 
+        details: String,
+        weight: Number,
         dueDate: String,
         completed: Boolean,
         onTime: Boolean,

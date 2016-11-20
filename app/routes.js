@@ -9,8 +9,11 @@ module.exports = function(app, passport) {
     });
 
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.pug', {
-            user : req.user
+        Badge.find({}, function(err, badges) {
+          res.render('profile.pug', {
+            user : req.user,
+            badges: badges
+          });
         });
     });
 
@@ -261,12 +264,17 @@ module.exports = function(app, passport) {
                 }
             }
             progresses.push(Math.round(numer/denom*100));
-            if (progresses(Math.round(numer/denom*100)) == 100) {
+            if (Math.round(numer/denom*100) == 100) {
+              console.log("YAY");
+              console.log(req.user.goals[i].details);
               var badge = new Badge({
-                name: req.user.goals[i].name,
+                name: req.user.goals[i].details,
+                user: req.user.id,
                 fileName: null
               })
-            });
+              badge.save()
+              req.user.goals.splice(i,1);
+            }
 
         }
         res.render('goals.pug', {goals: req.user.goals, progresses: progresses});
