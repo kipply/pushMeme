@@ -9,11 +9,23 @@ module.exports = function(app, passport) {
     });
 
     app.get('/profile', isLoggedIn, function(req, res) {
-        Badge.find({}, function(err, badges) {
-          res.render('profile.pug', {
-            user : req.user,
-            badges: badges
-          });
+      console.log(req.user._id);
+        Badge.find({user: req.user._id}, function(err, badges) {
+          if (err) {
+            console.log("error");
+            console.log(err);
+          }
+
+          if (badges) {
+            console.log(badges.length);
+            res.render('profile.pug', {
+              user : req.user,
+              badges: badges
+            })
+          } else {
+            console.log("no data");
+            res.render('profile.pug');
+          };
         });
     });
 
@@ -192,7 +204,7 @@ module.exports = function(app, passport) {
                       throw err;
                     for (var i = 0; i < group.length; i++){
                         if (req.body.joinpassword == group[i].password){
-                            updatedMembers = group[i].members; 
+                            updatedMembers = group[i].members;
                             updatedMembers.push(req.user.id);
                             Group.update({_id: group[i].id}, {
                                 members: updatedMembers
@@ -268,7 +280,7 @@ module.exports = function(app, passport) {
                  })
              }
          }
- 
+
          addedGoals.push({
              details: req.body.goalName,
              tasks:tasks
@@ -278,7 +290,7 @@ module.exports = function(app, passport) {
          }, function(err, numberAffected, rawResponse) {
             //handle it
          })
- 
+
          res.redirect('/new-goal')
     });     
 
@@ -294,23 +306,12 @@ module.exports = function(app, passport) {
                 }
             }
             progresses.push(Math.round(numer/denom*100));
-            if (Math.round(numer/denom*100) == 100) {
-              console.log("YAY");
-              console.log(req.user.goals[i].details);
-              var badge = new Badge({
-                name: req.user.goals[i].details,
-                user: req.user.id,
-                fileName: null
-              })
-              badge.save()
-              req.user.goals.splice(i,1);
-            }
 
-        }
         res.render('goals.pug', {goals: req.user.goals, progresses: progresses});
+      }
     });
 
-    app.get('/tasks/:id/:true', isLoggedIn, function (req, res) {
+    app.get('/tasks/:id/:true/:finished', isLoggedIn, function (req, res) {
         console.log(req.params.id)
         var goal = req.params.id.split("-")[0];
         var task = req.params.id.split("-")[1];
