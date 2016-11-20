@@ -130,7 +130,7 @@ module.exports = function(app, passport) {
               res.render('create-group.pug')
             });
 
-          
+
             // creates a new group with attributes of name and password
             app.post('/createnewgroup', isLoggedIn, function(req, res) {
 
@@ -253,7 +253,7 @@ module.exports = function(app, passport) {
     app.post('/create-new-goal', isLoggedIn, function(req, res){
         console.log(req.body);
         addedGoals = req.user.goals;
-        var tasks = [];         
+        var tasks = [];
         if (req.body.taskName[0].length == 1){
              tasks.push({
                  details: req.body.taskName,
@@ -356,7 +356,7 @@ module.exports = function(app, passport) {
               throw err;
             for (var i = 0; i < group.length; i++){
                 if (req.body.joinpassword == group[i].password){
-                    updatedMembers = group[i].members; 
+                    updatedMembers = group[i].members;
                     updatedMembers.push(req.user.id);
                     Group.update({_id: group[i].id}, {
                         members: updatedMembers

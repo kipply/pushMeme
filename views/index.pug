@@ -1,13 +1,75 @@
+
+
 doctype html
-html
+html(lang='en')
   head
-    title Push Meme
-    link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no')
+    title Home
+    // CSS
     link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')
-    style.
-      body         { padding-top:80px; }
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    link(href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css', type='text/css', rel='stylesheet', media='screen,projection')
+    link(href='css/style.css', type='text/css', rel='stylesheet', media='screen,projection')
   body
+    #bar.navbar-fixed
+      nav.cyan
+        .navy7u676uh.container
+          a#logo-container.brand-logo(href='index.html')
+            | pushme.me
+          ul#hek.right.hide-on-lg-and-down(style='font-size: 30em;')
+            li
+              a(href='#how-it-works') How It Works
+            li
+              a(href='#about-us') About Us
+            li
+              a(href='#') Log In
+            li
+              a(href='#') Register
+          ul#nav-mobile.side-nav
+            li
+              a(href='#') Register
+            |         li>
+            a(href='#') Log In
+          a.button-collapse(href='#', data-activates='nav-mobile')
+            i.material-icons menu
+
+
+    #index-banner.parallax-container
+      .section.no-pad-bot
+        .container
+          br
+          br
+          h1.header.center.cyan-text.text-lighten-2(style='text-shadow: 2px 2px 8px black;')
+            br
+            | Productivity Starts here
+          .row.center
+            h5.header.col.s12.light
+              | Get stuff done. 
+              br
+              |  The meme way.
+          .row.center
+            p Login or Register with:
+            a.btn.cyan.btn-default(href='/login')
+              span.fa.fa-user
+              |  Login
+            a.btn.cyan.btn-default(href='/signup')
+              span.fa.fa-user
+              |  Signup
+            a.btn.cyan.btn-primary(href='/auth/facebook')
+              span.fa.fa-facebook
+              |  Facebook
+            a.btn.cyan.btn-danger(href='/auth/google')
+              span.fa.fa-google-plus
+              |  Google+
+          br
+          br
+          br
+          br
+      
+        img(src='http://galaxybackground.com/wp-content/uploads/2014/09/city-hazy-blurred-unsharp-night-rain-1920x1080.jpg', alt='Unsplashed background img 1')
     .container
+
       .jumbotron.text-center
         h1
           span.fa.fa-heart
@@ -25,3 +87,63 @@ html
         a.btn.btn-danger(href='/auth/google')
           span.fa.fa-google-plus
           |  Google+
+      #how-it-works.section
+        h4.center How It Works
+        // Icon Section
+        .row
+          .col.s12.m4
+            .icon-block
+              h2.center.grey-text
+                i.material-icons flash_on
+              h5.center Keep Organized and Track Your Own Goals
+              p.light
+                | Individual and group goals are set for a due date and can be broken down into smaller tasks to do each with their own due date. A progress bar at the top shows how far tasks and goals are coming along. PushMe.me keeps you on track for achieving both your group goals and your personal goals.
+          .col.s12.m4
+            .icon-block
+              h2.center.grey-text
+                i.material-icons group
+              h5.center Achieve Goals With Friends
+              p.light
+                | By tracking individual progress and overall group progress, group members can keep each other accountable. If someone is not performing at their best, a meme of encouragement can be sent. If someone is performing well beyond expectations, a meme of celebration can be delivered.
+          .col.s12.m4
+            .icon-block
+              h2.center.grey-text
+                i.material-icons settings
+              h5.center Spread Memes of Encouragement
+              p.light
+                | Encouragement on PushMe.me is supplied through the generation of memes and inspirational messages. Happy, funny memes of all sorts are sent when an individual/group is staying on task. Anonymous messages can also be sent individually to cheer on people with their productivity.
+    .parallax-container
+      .section.no-pad-bot
+        .container
+          .row
+          .col.s12.center
+            
+            h5.center.light Get the most out of your time.
+      
+        img(src='http://galaxybackground.com/wp-content/uploads/2014/09/city-hazy-blurred-unsharp-night-rain-1920x1080.jpg')
+    #about-us.container
+      .section
+        .row
+          .col.s12.center
+            h3
+              i.mdi-content-send.grey-text
+            h4 About Us
+            p.left-align.light
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+    .parallax-container
+      .section.no-pad-bot
+        .container
+          .row.center
+            h5.header.col.s12.light Don't let your goals or memes be dreams.
+      .parallax
+        img(src='background3.jpg', alt='Unsplashed background img 3')
+    footer.cyan.page-footer
+      .footer-copyright
+        .container
+          | © 2016 Copyright Information
+          a.grey-text.text-lighten-4.right(href='#!') Terms and Conditions
+    // Scripts
+    script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+    script(src='js/materialize.js')
+    script(src='js/init.js')
+
