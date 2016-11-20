@@ -98,11 +98,9 @@ var Group = require('../app/models/group.js');
               }, function(err, group){
                 if(err)
                   throw err;
-                  res.render('group-home.pug', {group: group});
-                  console.log(group)
+                res.render('group-home.pug', {group: group});
+                console.log(group);
               })
-
-              //res.send('id: ' + req.query.id);
             });
 
 
@@ -110,6 +108,18 @@ var Group = require('../app/models/group.js');
             // takes you to the create a group page
             app.get('/creategroup', function(req, res) {
               res.render('create-group.pug')
+            });
+
+            app.get('/groupgoal/:id', function(req, res) {
+              var id = req.params.id;
+              Group.findOne({
+                '_id': id
+              }, function(err, group){
+                if(err)
+                  throw err;
+                res.render('new-group-goal.pug', {group: group});
+                console.log(group);
+              })
             });
 
             // creates a new group with attributes of name and password
@@ -136,10 +146,39 @@ var Group = require('../app/models/group.js');
                   console.log("Group not saved");
                 }
                 var groupid = savedGroup.id;
-                var groupy = savedGroup;
+                //var groupy = savedGroup;
                 res.redirect('/group/' + groupid);
               });
+            }); // end of post
 
+            app.post('/create-new-group-goal', function(req, res){
+                console.log(req.body.group);
+                addedGoals = req.group.group.groupgoals;
+                var tasks = [];
+                for (var i = 0; i < req.body.taskName.length; i++){
+                    tasks.push({
+                        details: req.body.taskName[i],
+                        weight: req.body.difficulty[i],
+                        dueDate: req.body.dueDate[i],
+                        completed: false
+                    })
+                }
+
+                addedGoals.push({
+                    details: req.body.goalName,
+                    tasks:tasks
+                })
+                Group.update({_id: req.group.group._id}, {
+                    groupgoals: addedGoals
+                }, function(err, numberAffected, rawResponse) {
+                   //handle it
+                })
+
+                res.redirect('/group-home')
+            })
+
+            app.get('/group-home', function(req, res) {
+                res.render('goals-home.pug', {groupgoals: req.group.groupgoals});
             });
 
             app.get('/joingroup', function(req, res) {
