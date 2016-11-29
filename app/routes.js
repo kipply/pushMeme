@@ -123,9 +123,6 @@ module.exports = function(app, passport) {
               })
             });
 
-
-
-            // takes you to the create a group page
             app.get('/creategroup', function(req, res) {
               res.render('create-group.pug')
             });
