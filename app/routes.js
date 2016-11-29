@@ -302,10 +302,10 @@ module.exports = function(app, passport) {
               var badge = new Badge({
                 name: req.user.goals[i].details,
                 user: req.user.id,
-                fileName: pepe.png
+                fileName: 'pepe.png'
               })
               badge.save()
-              req.user.goals[i].tasks.splice(0, tasks.length);
+              // req.user.goals[i].tasks.splice(0, tasks.length);
               req.user.goals.splice(i,1);
             }
         }
