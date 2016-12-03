@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('view engine', 'pug');
 
-// required for passport
+// required for passport	
 app.use(session({
     secret: 'wowthisisagreatsessionsecret',
     resave: true,
